@@ -3,8 +3,13 @@
 
 import numpy as np
 
+def mae(e):
+    return np.mean(np.abs(e))
 
-def compute_loss(y, tx, w):
+def mse(e):
+    return np.mean(e ** 2)
+
+def compute_loss(y, tx, w, L=mse):
     """Calculate the loss using either MSE or MAE.
 
     Args:
@@ -15,8 +20,6 @@ def compute_loss(y, tx, w):
     Returns:
         the value of the loss (a scalar), corresponding to the input parameters w.
     """
-    # ***************************************************
-    # INSERT YOUR CODE HERE
-    # TODO: compute loss by MSE
-    # ***************************************************
-    raise NotImplementedError
+    e = y - tx @ w
+    
+    return L(e)
