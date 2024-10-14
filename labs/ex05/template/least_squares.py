@@ -7,6 +7,9 @@ Least Square
 import numpy as np
 
 
+def mse(e):
+    return np.mean(e ** 2)
+
 def least_squares(y, tx):
     """calculate the least squares."""
     # ***************************************************
@@ -14,4 +17,11 @@ def least_squares(y, tx):
     # least squares: TODO
     # returns mse, and optimal weights
     # ***************************************************
-    raise NotImplementedError
+    a = tx.T @ tx
+    b = tx.T @ y
+    
+    w = np.linalg.solve(a, b)
+    yp = tx @ w
+    e = mse(y - yp)
+
+    return w, e
